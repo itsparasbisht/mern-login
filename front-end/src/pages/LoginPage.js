@@ -56,11 +56,13 @@ function LoginPage() {
                 const response = await axios.post('/api/auth/sign-up', data)
 
                 if (response) {
-                    setDisableSignUp(false)
+                    console.log(response.status)
                 }
+                setDisableSignUp(false)
             }
             catch (error) {
-
+                console.log(">>>", error.message)
+                setDisableSignUp(false)
             }
         }
     }
@@ -74,7 +76,7 @@ function LoginPage() {
     return (
         <div className='login__container'>
             <div className='login__container-block block1'>
-                <form>
+                <div className='login__container-form'>
                     <div className='login__container-formHeader'>
                         <img src='/resources/our-logo.webp' alt="" />
                         <span>Foxconn Industries</span>
@@ -108,7 +110,7 @@ function LoginPage() {
                             <Button onClick={resetForm} variant="text">Reset</Button>
                         </Stack>
                     </div>
-                </form>
+                </div>
             </div>
             <div className='login__container-block block2'>
                 <img src="/resources/fox.png" alt="" />

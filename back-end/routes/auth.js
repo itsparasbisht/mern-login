@@ -10,12 +10,19 @@ router.post('/sign-up', async (req, res) => {
     try {
         const { username, password } = req.body
 
-        const newUser = new User({ username, password })
-        const data = await newUser.save()
-        res.status(201).send({ username: data.username, message: "user created" })
+        const user = await User.findOne({ username })
+
+        if (user) {
+            res.status(200).send({ message: "username exists" })
+        }
+        else {
+            const newUser = await User.create({ username, password })
+            res.status(201).send({ username: newUser.username, message: "user created" })
+        }
     }
     catch (error) {
-        console.log(error)
+        console.log(">>>", error.message)
+        res.status(500).send({ message: "Intrnal server error" })
     }
 })
 

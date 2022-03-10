@@ -38,7 +38,7 @@
 .block2 a{
     font-weight: 800;
 }
-.block1 > form{
+.block1 > .login__container-form{
     padding: 20px;
     margin: 7% auto;
     width: 400px;
