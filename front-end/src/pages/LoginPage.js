@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import validator from 'validator';
 import { Tooltip } from '@mui/material';
 import axios from 'axios'
+import SnackbarComponent from '../components/SnackbarComponent';
 
 function LoginPage() {
     const [username, setUsername] = useState('')
@@ -18,6 +19,7 @@ function LoginPage() {
     const [cPasswordError, setCPasswordError] = useState(false)
 
     const [disableSignUp, setDisableSignUp] = useState(false)
+    const [error, setError] = useState(false)
 
     const signUp = () => {
         const checkUserName = validator.isAlphanumeric(username)
@@ -43,6 +45,7 @@ function LoginPage() {
     }
 
     const signUpCall = async () => {
+        setError(false)
         if (usernameError || passwordError || cPasswordError) {
             // no call to api
         }
@@ -55,8 +58,8 @@ function LoginPage() {
             try {
                 const response = await axios.post('/api/auth/sign-up', data)
 
-                if (response) {
-                    console.log(response.status)
+                if (response.data.message === "username exists") {
+                    setError(true)
                 }
                 setDisableSignUp(false)
             }
@@ -74,51 +77,54 @@ function LoginPage() {
     }
 
     return (
-        <div className='login__container'>
-            <div className='login__container-block block1'>
-                <div className='login__container-form'>
-                    <div className='login__container-formHeader'>
-                        <img src='/resources/our-logo.webp' alt="" />
-                        <span>Foxconn Industries</span>
-                    </div>
-                    <div className='login__container-formBody'>
-                        <Box
-                            component="form"
-                            sx={{
-                                '& > :not(style)': { m: 1, width: '80%' },
-                            }}
-                            noValidate
-                            autoComplete="off"
-                            className='login__container-formBody'
-                        >
-                            <Tooltip disableFocusListener title="username should be alpha-numeric" placement="right-start">
-                                <TextField error={usernameError} fullWidth={true} value={username} onChange={(e) => setUsername(e.target.value)} id="outlined-basic" label="username" variant="outlined" />
-                            </Tooltip>
+        <>
+            <div className='login__container'>
+                <div className='login__container-block block1'>
+                    <div className='login__container-form'>
+                        <div className='login__container-formHeader'>
+                            <img src='/resources/our-logo.webp' alt="" />
+                            <span>Foxconn Industries</span>
+                        </div>
+                        <div className='login__container-formBody'>
+                            <Box
+                                component="form"
+                                sx={{
+                                    '& > :not(style)': { m: 1, width: '80%' },
+                                }}
+                                noValidate
+                                autoComplete="off"
+                                className='login__container-formBody'
+                            >
+                                <Tooltip disableFocusListener title="username should be alpha-numeric" placement="right-start">
+                                    <TextField error={usernameError} fullWidth={true} value={username} onChange={(e) => setUsername(e.target.value)} id="outlined-basic" label="username" variant="outlined" />
+                                </Tooltip>
 
-                            <Tooltip disableFocusListener title="provide a strong password (use upper and lower cases with digits and special characters, min 8 characters)" placement="right-start">
-                                <TextField error={passwordError} type={'password'} value={password} onChange={(e) => setPassword(e.target.value)} fullWidth={true} id="outlined-basic" label="password" variant="outlined" />
-                            </Tooltip>
+                                <Tooltip disableFocusListener title="provide a strong password (use upper and lower cases with digits and special characters, min 8 characters)" placement="right-start">
+                                    <TextField error={passwordError} type={'password'} value={password} onChange={(e) => setPassword(e.target.value)} fullWidth={true} id="outlined-basic" label="password" variant="outlined" />
+                                </Tooltip>
 
-                            <Tooltip disableFocusListener title="password should match" placement="right-start">
-                                <TextField error={cPasswordError} type={'password'} value={cPassword} onChange={(e) => setCPassword(e.target.value)} fullWidth={true} id="outlined-basic" label="confirm password" variant="outlined" />
-                            </Tooltip>
+                                <Tooltip disableFocusListener title="password should match" placement="right-start">
+                                    <TextField error={cPasswordError} type={'password'} value={cPassword} onChange={(e) => setCPassword(e.target.value)} fullWidth={true} id="outlined-basic" label="confirm password" variant="outlined" />
+                                </Tooltip>
 
-                        </Box>
+                            </Box>
 
-                        <Stack className='login__container-formBodyButtons' spacing={2} direction="row">
-                            <Button disabled={disableSignUp} onClick={signUp} variant="contained">Sign up</Button>
-                            <Button onClick={resetForm} variant="text">Reset</Button>
-                        </Stack>
+                            <Stack className='login__container-formBodyButtons' spacing={2} direction="row">
+                                <Button disabled={disableSignUp} onClick={signUp} variant="contained">Sign up</Button>
+                                <Button onClick={resetForm} variant="text">Reset</Button>
+                            </Stack>
+                        </div>
                     </div>
                 </div>
+                <div className='login__container-block block2'>
+                    <img src="/resources/fox.png" alt="" />
+                    <span>Foxconn private limited.</span>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit, nostrum?</p>
+                    <p><a href="">Know more</a> about us</p>
+                </div>
             </div>
-            <div className='login__container-block block2'>
-                <img src="/resources/fox.png" alt="" />
-                <span>Foxconn private limited.</span>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit, nostrum?</p>
-                <p><a href="">Know more</a> about us</p>
-            </div>
-        </div>
+            {error && <SnackbarComponent handle={true} message={"username already exists"} type={"error"} />}
+        </>
     )
 }
 

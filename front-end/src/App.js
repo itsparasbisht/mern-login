@@ -1,4 +1,5 @@
 import './App.css';
+import SnackbarComponent from './components/SnackbarComponent';
 import LoginPage from './pages/LoginPage';
 
 function App() {

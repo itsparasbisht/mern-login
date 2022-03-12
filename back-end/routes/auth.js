@@ -1,10 +1,13 @@
 const express = require('express')
 const router = express.Router()
 
-const bcrypt = require('bcrypt');
 const User = require('../models/User');
+
+const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const myPlaintextPassword = 'amir20v@x$7cx1@1qwCvCDz^f';
+
+const jwt = require('jsonwebtoken');
+const privateKey = "*&ghgds_12WWe&TgFt@1gguDCXXzwE:kjikohi"
 
 router.post('/sign-up', async (req, res) => {
     try {
@@ -16,8 +19,27 @@ router.post('/sign-up', async (req, res) => {
             res.status(200).send({ message: "username exists" })
         }
         else {
-            const newUser = await User.create({ username, password })
-            res.status(201).send({ username: newUser.username, message: "user created" })
+            bcrypt.hash(password, saltRounds, async (err, hash) => {
+                if (err) {
+                    throw err
+                }
+                else {
+                    const password = hash
+                    const newUser = await User.create({ username, password })
+
+                    const payload = {
+                        username: newUser.username,
+                        id: newUser.id
+                    }
+
+                    jwt.sign(payload, privateKey, { algorithm: 'HS256' }, function (err, token) {
+                        if (err) {
+                            throw err
+                        }
+                        res.status(201).send({ username: newUser.username, token: token, message: "user created" })
+                    });
+                }
+            });
         }
     }
     catch (error) {
