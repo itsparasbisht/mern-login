@@ -9,6 +9,7 @@ const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 const privateKey = "*&ghgds_12WWe&TgFt@1gguDCXXzwE:kjikohi"
 
+// create a new user
 router.post('/sign-up', async (req, res) => {
     try {
         const { username, password } = req.body
@@ -48,6 +49,12 @@ router.post('/sign-up', async (req, res) => {
         console.log(">>>", error.message)
         res.status(500).send({ message: "Intrnal server error" })
     }
+})
+
+router.get('/get-user', async (req, res) => {
+    const cookies = req.headers.cookie
+    console.log(">>>", cookies)
+    res.send(cookies)
 })
 
 module.exports = router
