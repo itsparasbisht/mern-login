@@ -57,9 +57,12 @@ function LoginPage() {
             }
             try {
                 const response = await axios.post('/api/auth/sign-up', data)
-
+                console.log(response)
                 if (response.data.message === "username exists") {
                     setError(true)
+                }
+                else if (response.status === 201) {
+                    window.location.href = '/home'
                 }
                 setDisableSignUp(false)
             }

@@ -36,7 +36,9 @@ router.post('/sign-up', async (req, res) => {
                         if (err) {
                             throw err
                         }
-                        res.status(201).send({ username: newUser.username, token: token, message: "user created" })
+                        // send the cookie
+                        res.cookie('jwt', token, { maxAge: 1000 * 60 * 60 * 24 * 2, httpOnly: true });
+                        res.status(201).send({ username: newUser.username, message: "user created" })
                     });
                 }
             });
