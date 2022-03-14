@@ -16,7 +16,7 @@ function RootPage() {
             console.log(">>>", response)
         }
         catch (error) {
-
+            window.location.href = '/sign-up'
         }
     }
     return (
