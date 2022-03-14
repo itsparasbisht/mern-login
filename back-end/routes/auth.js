@@ -38,7 +38,8 @@ router.post('/sign-up', async (req, res) => {
                             throw err
                         }
                         // send the cookie
-                        res.cookie('jwt', token, { maxAge: 1000 * 60 * 60 * 24 * 2, httpOnly: true });
+                        res.cookie('jwt', token, { maxAge: 10000, httpOnly: true });
+                        // res.cookie('jwt', token, { maxAge: 1000 * 60 * 60 * 24 * 2, httpOnly: true });
                         res.status(201).send({ username: newUser.username, message: "user created" })
                     });
                 }
@@ -51,10 +52,31 @@ router.post('/sign-up', async (req, res) => {
     }
 })
 
+// get user details
 router.get('/get-user', async (req, res) => {
-    const cookies = req.headers.cookie
-    console.log(">>>", cookies)
-    res.send(cookies)
+    try {
+        const cookies = req.headers.cookie
+        const cookieArray = cookies.split(';')
+        const cookieObj = cookieArray.map(item => {
+            const data = item.split('=')
+            return {
+                "key": data[0],
+                "value": data[1]
+            }
+        })
+        const token = cookieObj[0].value
+
+        // verify the token
+        jwt.verify(token, privateKey, async function (err, decoded) {
+            const userId = decoded.id
+
+            const user = await User.findById(userId)
+            console.log(user)
+        });
+    }
+    catch (error) {
+        res.status(401).send({ message: "authentication error" })
+    }
 })
 
 module.exports = router
