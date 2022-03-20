@@ -38,8 +38,7 @@ router.post('/sign-up', async (req, res) => {
                             throw err
                         }
                         // send the cookie
-                        res.cookie('jwt', token, { maxAge: 10000, httpOnly: true });
-                        // res.cookie('jwt', token, { maxAge: 1000 * 60 * 60 * 24 * 2, httpOnly: true });
+                        res.cookie('jwt', token, { maxAge: 1000 * 60 * 60 * 24 * 2, httpOnly: true });
                         res.status(201).send({ username: newUser.username, message: "user created" })
                     });
                 }
@@ -48,7 +47,7 @@ router.post('/sign-up', async (req, res) => {
     }
     catch (error) {
         console.log(">>>", error.message)
-        res.status(500).send({ message: "Intrnal server error" })
+        res.status(500).send({ message: "Internal server error" })
     }
 })
 
@@ -70,12 +69,51 @@ router.get('/get-user', async (req, res) => {
         jwt.verify(token, privateKey, async function (err, decoded) {
             const userId = decoded.id
 
-            const user = await User.findById(userId)
-            console.log(user)
+            const user = await User.findById(userId, { password: false })
+            res.status(200).send(user)
         });
     }
     catch (error) {
         res.status(401).send({ message: "authentication error" })
+    }
+})
+
+// login user
+router.post('/log-in', async (req, res) => {
+    try {
+        const { username, password } = req.body
+
+        const user = await User.findOne({ username })
+
+        if (user) {
+            const hash = user.password
+            bcrypt.compare(password, hash, function (err, result) {
+                if (result) {
+                    const payload = {
+                        username: user.username,
+                        id: user.id
+                    }
+
+                    jwt.sign(payload, privateKey, { algorithm: 'HS256' }, function (err, token) {
+                        if (err) {
+                            throw err
+                        }
+                        // send the cookie
+                        res.cookie('jwt', token, { maxAge: 1000 * 60 * 60 * 24 * 2, httpOnly: true });
+                        res.send({ username: user.username, message: "user logged in" })
+                    });
+                }
+                else {
+                    res.status(401).send({ message: "invalid credentials" })
+                }
+            });
+        }
+        else {
+            res.status(401).send({ message: "user does not exist" })
+        }
+    }
+    catch (error) {
+        res.status(500).send({ message: "Internal server error" })
     }
 })
 
