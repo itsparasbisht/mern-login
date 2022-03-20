@@ -1,0 +1,9 @@
+.login__container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background-color: black;
+}
+.login__form{
+    background-color: red;
+}
