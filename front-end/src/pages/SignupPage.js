@@ -8,7 +8,7 @@ import validator from 'validator';
 import { Tooltip } from '@mui/material';
 import axios from 'axios'
 import SnackbarComponent from '../components/SnackbarComponent';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SignupPage() {
     const [username, setUsername] = useState('')
@@ -21,6 +21,8 @@ function SignupPage() {
 
     const [disableSignUp, setDisableSignUp] = useState(false)
     const [error, setError] = useState(false)
+
+    const navigate = useNavigate()
 
     const signUp = () => {
         const checkUserName = validator.isAlphanumeric(username)
@@ -63,7 +65,7 @@ function SignupPage() {
                     setError(true)
                 }
                 else if (response.status === 201) {
-                    window.location.href = '/home'
+                    navigate('/home')
                 }
                 setDisableSignUp(false)
             }

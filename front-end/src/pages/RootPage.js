@@ -1,10 +1,12 @@
 import axios from 'axios'
 import React from 'react'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 axios.defaults.withCredentials = true
 
 function RootPage() {
+    const navigate = useNavigate()
 
     useEffect(() => {
         getUser()
@@ -13,10 +15,10 @@ function RootPage() {
     const getUser = async () => {
         try {
             const response = await axios.get('/api/auth/get-user')
-            console.log(">>>", response)
+            navigate('/home')
         }
         catch (error) {
-            window.location.href = '/sign-up'
+            navigate('/log-in')
         }
     }
     return (
