@@ -1,11 +1,11 @@
-.login__container{
+.signup__container{
    width: 100vw;
    height: 100vh;
    background: rgb(255, 255, 255);
    /* background: linear-gradient(240deg, rgba(0,0,0,1) 0%, rgba(42,98,164,1) 48%, rgba(20,215,200,1) 100%, rgba(0,212,255,1) 100%); */
    display: flex;
 }
-.login__container-block{
+.signup__container-block{
     width: 100vw;
     height: 100vh;
 }
@@ -38,7 +38,7 @@
 .block2 a{
     font-weight: 800;
 }
-.block1 > .login__container-form{
+.block1 > .signup__container-form{
     padding: 20px;
     margin: 7% auto;
     width: 400px;
@@ -47,29 +47,29 @@
     border-radius: 20px;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
-.login__container-formHeader{
+.signup__container-formHeader{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.login__container-formHeader > img{
+.signup__container-formHeader > img{
     width: 60px;
 }
-.login__container-formHeader > span{
+.signup__container-formHeader > span{
     display: inline-block;
     margin-top: 5px;
     font-size: 23px;
     font-weight: 700;
     color: rgb(59, 59, 59);
 }
-.login__container-formBody > *{
+.signup__container-formBody > *{
     margin-top: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.login__container-formBodyButtons{
+.signup__container-formBodyButtons{
     justify-content: flex-start;
     margin-left: 35px;
 }
@@ -84,7 +84,7 @@
     background-color: rgb(214, 214, 214) !important;
     color: rgb(97, 97, 97) !important;
 }
-.login__container-footer{
+.signup__container-footer{
     padding: 10px 40px;
     font-size: 16px;
     font-weight: 500;
@@ -97,7 +97,7 @@
 }
 
 @media all and (max-width: 800px){
-    .login__container{
+    .signup__container{
         flex-direction: column;
     }
     .block2{

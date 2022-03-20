@@ -10,7 +10,7 @@ import axios from 'axios'
 import SnackbarComponent from '../components/SnackbarComponent';
 import { Link } from "react-router-dom";
 
-function LoginPage() {
+function SignupPage() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [cPassword, setCPassword] = useState('')
@@ -82,14 +82,14 @@ function LoginPage() {
 
     return (
         <>
-            <div className='login__container'>
-                <div className='login__container-block block1'>
-                    <div className='login__container-form'>
-                        <div className='login__container-formHeader'>
+            <div className='signup__container'>
+                <div className='signup__container-block block1'>
+                    <div className='signup__container-form'>
+                        <div className='signup__container-formHeader'>
                             <img src='/resources/our-logo.webp' alt="" />
                             <span>Foxconn Industries</span>
                         </div>
-                        <div className='login__container-formBody'>
+                        <div className='signup__container-formBody'>
                             <Box
                                 component="form"
                                 sx={{
@@ -97,7 +97,7 @@ function LoginPage() {
                                 }}
                                 noValidate
                                 autoComplete="off"
-                                className='login__container-formBody'
+                                className='signup__container-formBody'
                             >
                                 <Tooltip disableFocusListener title="username should be alpha-numeric" placement="right-start">
                                     <TextField error={usernameError} fullWidth={true} value={username} onChange={(e) => setUsername(e.target.value)} id="outlined-basic" label="username" variant="outlined" />
@@ -113,17 +113,17 @@ function LoginPage() {
 
                             </Box>
 
-                            <Stack className='login__container-formBodyButtons' spacing={2} direction="row">
+                            <Stack className='signup__container-formBodyButtons' spacing={2} direction="row">
                                 <Button disabled={disableSignUp} onClick={signUp} variant="contained">Create</Button>
                                 <Button onClick={resetForm} variant="text">Reset</Button>
                             </Stack>
                         </div>
-                        <div className='login__container-footer'>
+                        <div className='signup__container-footer'>
                             <p>already have an account <Link className="link" to='/log-in'>log in</Link></p>
                         </div>
                     </div>
                 </div>
-                <div className='login__container-block block2'>
+                <div className='signup__container-block block2'>
                     <img src="/resources/fox.png" alt="" />
                     <span>Foxconn private limited.</span>
                     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit, nostrum?</p>
@@ -135,4 +135,4 @@ function LoginPage() {
     )
 }
 
-export default LoginPage
+export default SignupPage
