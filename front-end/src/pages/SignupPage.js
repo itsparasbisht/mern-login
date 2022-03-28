@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './signupPage.css'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -9,6 +9,7 @@ import { Tooltip } from '@mui/material';
 import axios from 'axios'
 import SnackbarComponent from '../components/SnackbarComponent';
 import { Link, useNavigate } from "react-router-dom";
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 function SignupPage() {
     const [username, setUsername] = useState('')
@@ -82,6 +83,20 @@ function SignupPage() {
         setCPassword('')
     }
 
+    const passwordRef = useRef()
+    const [toggleShowPassword, setToggleShowPassword] = useState(true)
+
+    const showPassword = () => {
+        if(toggleShowPassword){
+            passwordRef.current.childNodes[1].childNodes[0].type = "text"
+            setToggleShowPassword(false)
+        }
+        else{
+            passwordRef.current.childNodes[1].childNodes[0].type = "password"
+            setToggleShowPassword(true)
+        }
+    }
+
     return (
         <>
             <div className='signup__container'>
@@ -106,8 +121,9 @@ function SignupPage() {
                                 </Tooltip>
 
                                 <Tooltip disableFocusListener title="provide a strong password (use upper and lower cases with digits and special characters, min 8 characters)" placement="right-start">
-                                    <TextField error={passwordError} type={'password'} value={password} onChange={(e) => setPassword(e.target.value)} fullWidth={true} id="outlined-basic" label="password" variant="outlined" />
+                                    <TextField ref={passwordRef} error={passwordError} type={'password'} value={password} onChange={(e) => setPassword(e.target.value)} fullWidth={true} id="outlined-basic" label="password" variant="outlined" />
                                 </Tooltip>
+                                <VisibilityIcon onClick={showPassword} />
 
                                 <Tooltip disableFocusListener title="password should match" placement="right-start">
                                     <TextField error={cPasswordError} type={'password'} value={cPassword} onChange={(e) => setCPassword(e.target.value)} fullWidth={true} id="outlined-basic" label="confirm password" variant="outlined" />
