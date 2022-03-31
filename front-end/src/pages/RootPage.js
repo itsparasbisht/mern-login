@@ -22,7 +22,7 @@ function RootPage() {
         }
     }
     return (
-        <div>RootPage</div>
+        <div>Loading</div>
     )
 }
 
