@@ -121,13 +121,14 @@ function SignupPage() {
                                 </Tooltip>
 
                                 <Tooltip disableFocusListener title="provide a strong password (use upper and lower cases with digits and special characters, min 8 characters)" placement="right-start">
-                                    <TextField ref={passwordRef} error={passwordError} type={'password'} value={password} onChange={(e) => setPassword(e.target.value)} fullWidth={true} id="outlined-basic" label="password" variant="outlined" />
+                                    <TextField className='signup__container-input1' ref={passwordRef} error={passwordError} type={'password'} value={password} onChange={(e) => setPassword(e.target.value)} fullWidth={true} id="outlined-basic" label="password" variant="outlined" />
                                 </Tooltip>
-                                <VisibilityIcon onClick={showPassword} />
+                                <VisibilityIcon className='visibility__icon1' onClick={showPassword} />
 
                                 <Tooltip disableFocusListener title="password should match" placement="right-start">
-                                    <TextField error={cPasswordError} type={'password'} value={cPassword} onChange={(e) => setCPassword(e.target.value)} fullWidth={true} id="outlined-basic" label="confirm password" variant="outlined" />
+                                    <TextField className='signup__container-input2' error={cPasswordError} type={'password'} value={cPassword} onChange={(e) => setCPassword(e.target.value)} fullWidth={true} id="outlined-basic" label="confirm password" variant="outlined" />
                                 </Tooltip>
+                                <VisibilityIcon className='visibility__icon2' onClick={showPassword} />
 
                             </Box>
 

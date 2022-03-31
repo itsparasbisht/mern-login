@@ -95,6 +95,24 @@
     font-weight: 600;
     margin-left: 3px;
 }
+.signup__container-input1{
+    position: absolute;
+}
+.visibility__icon1{
+    position: relative;
+    left: 30%;
+    bottom: 19%;
+}
+.signup__container-input2{
+    position: absolute;
+}
+.visibility__icon2{
+    position: relative;
+    left: 20%;
+}
+.visibility__icon:hover{
+    cursor: pointer;
+}
 
 @media all and (max-width: 800px){
     .signup__container{
