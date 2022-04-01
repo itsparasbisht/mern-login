@@ -11,5 +11,12 @@
     height: auto;
     background-color: rgb(255, 255, 255);
     border-radius: 20px;
-    box-shadow: rgb(255, 115, 0) 0px 20px 30px -10px;
+    box-shadow: -10px 10px 0px rgb(0, 0, 0), -15px 15px 0px rgb(255, 115, 0);
+}
+
+@media all and (max-width: 800px){
+    .block > .signup__container-form{
+        padding: 20px;
+        margin: 15% auto;
+    }
 }
