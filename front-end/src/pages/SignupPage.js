@@ -10,6 +10,7 @@ import axios from 'axios'
 import SnackbarComponent from '../components/SnackbarComponent';
 import { Link, useNavigate } from "react-router-dom";
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 function SignupPage() {
     const [username, setUsername] = useState('')
@@ -84,16 +85,30 @@ function SignupPage() {
     }
 
     const passwordRef = useRef()
+    const cPasswordRef = useRef()
     const [toggleShowPassword, setToggleShowPassword] = useState(true)
+    const [toggleShowCPassword, setToggleShowCPassword] = useState(true)
 
-    const showPassword = () => {
-        if(toggleShowPassword){
-            passwordRef.current.childNodes[1].childNodes[0].type = "text"
-            setToggleShowPassword(false)
+    const showPassword = (ref) => {
+        if(ref === passwordRef){
+            if(toggleShowPassword){
+                ref.current.childNodes[1].childNodes[0].type = "text"
+                setToggleShowPassword(false)
+            }
+            else{
+                ref.current.childNodes[1].childNodes[0].type = "password"
+                setToggleShowPassword(true)
+            }
         }
         else{
-            passwordRef.current.childNodes[1].childNodes[0].type = "password"
-            setToggleShowPassword(true)
+            if(toggleShowCPassword){
+                ref.current.childNodes[1].childNodes[0].type = "text"
+                setToggleShowCPassword(false)
+            }
+            else{
+                ref.current.childNodes[1].childNodes[0].type = "password"
+                setToggleShowCPassword(true)
+            }
         }
     }
 
@@ -120,15 +135,23 @@ function SignupPage() {
                                     <TextField error={usernameError} fullWidth={true} value={username} onChange={(e) => setUsername(e.target.value)} id="outlined-basic" label="username" variant="outlined" />
                                 </Tooltip>
 
-                                <Tooltip disableFocusListener title="provide a strong password (use upper and lower cases with digits and special characters, min 8 characters)" placement="right-start">
-                                    <TextField className='signup__container-input1' ref={passwordRef} error={passwordError} type={'password'} value={password} onChange={(e) => setPassword(e.target.value)} fullWidth={true} id="outlined-basic" label="password" variant="outlined" />
-                                </Tooltip>
-                                <VisibilityIcon className='visibility__icon1' onClick={showPassword} />
+                                <div className='signup__container-input1'>
+                                    <Tooltip disableFocusListener title="provide a strong password (use upper and lower cases with digits and special characters, min 8 characters)" placement="right-start">
+                                        <TextField ref={passwordRef} error={passwordError} type={'password'} value={password} onChange={(e) => setPassword(e.target.value)} fullWidth={true} id="outlined-basic" label="password" variant="outlined" />
+                                    </Tooltip>
+                                    <span className='visibility__icon' onClick={() => {showPassword(passwordRef)}}>
+                                        { toggleShowPassword ? <VisibilityIcon /> : <VisibilityOffIcon /> }
+                                    </span>
+                                </div>
 
-                                <Tooltip disableFocusListener title="password should match" placement="right-start">
-                                    <TextField className='signup__container-input2' error={cPasswordError} type={'password'} value={cPassword} onChange={(e) => setCPassword(e.target.value)} fullWidth={true} id="outlined-basic" label="confirm password" variant="outlined" />
-                                </Tooltip>
-                                <VisibilityIcon className='visibility__icon2' onClick={showPassword} />
+                                <div className='signup__container-input2'>
+                                    <Tooltip disableFocusListener title="password should match" placement="right-start">
+                                        <TextField ref={cPasswordRef} error={cPasswordError} type={'password'} value={cPassword} onChange={(e) => setCPassword(e.target.value)} fullWidth={true} id="outlined-basic" label="confirm password" variant="outlined" />
+                                    </Tooltip>
+                                    <span className='visibility__icon' onClick={() => {showPassword(cPasswordRef)}}>
+                                    { toggleShowCPassword ? <VisibilityIcon /> : <VisibilityOffIcon /> }
+                                    </span>
+                                </div>
 
                             </Box>
 
