@@ -95,20 +95,14 @@
     font-weight: 600;
     margin-left: 3px;
 }
-.signup__container-input1{
-    position: absolute;
-}
-.visibility__icon1{
+.signup__container-input1, .signup__container-input2{
     position: relative;
-    left: 30%;
-    bottom: 19%;
 }
-.signup__container-input2{
+.visibility__icon{
     position: absolute;
-}
-.visibility__icon2{
-    position: relative;
-    left: 20%;
+    left: 85%;
+    top: 25%;
+    color: rgb(32, 32, 32);
 }
 .visibility__icon:hover{
     cursor: pointer;
