@@ -2,14 +2,16 @@ import axios from 'axios'
 import React from 'react'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import './rootPage.css'
 axios.defaults.withCredentials = true
 
 function RootPage() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        getUser()
+        setTimeout(() => {
+            getUser()
+        }, 1000)
     }, [])
 
     const getUser = async () => {
@@ -22,7 +24,9 @@ function RootPage() {
         }
     }
     return (
-        <div>Loading</div>
+        <div className='rootPage__container'>
+            <img src="/resources/loading.svg" alt="loading graphic" />
+        </div>
     )
 }
 
