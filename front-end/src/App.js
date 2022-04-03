@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage';
 import { useContext } from 'react';
 import userContext from './context/userContext/UserContext';
 import NotFound from './pages/NotFound';
+import AuthGuard from './authGuard/AuthGuard';
 
 function App() {
   const [userState] = useContext(userContext)
@@ -17,14 +18,14 @@ function App() {
         <Routes>
           <Route path="/" element={<RootPage />} />
 
-          {
-            userState.isAuthenticated ?
-            <Route path="/home" element={<HomePage />} /> :
-            <Route path="/log-in" element={<LoginPage />} />
-          }
+          <Route path="/home" element={<AuthGuard />}>
+            <Route path='/home' element={<HomePage />} />
+          </Route>
 
+          <Route path="/log-in" element={<LoginPage />} />
           <Route path="/sign-up" element={<SignupPage />} />
-          {/* <Route path="*" element={<NotFound />} /> */}
+
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
