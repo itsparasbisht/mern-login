@@ -1,0 +1,24 @@
+.notFound__container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.notFound__container-icon{
+    color: red;
+    font-size: 200px !important;
+}
+.notFound__container-detail{
+    font-size: 3rem;
+    padding-left: 10px;
+}
+
+@media all and (max-width: 800px){
+    .notFound__container-icon{
+        font-size: 100px !important;
+    }
+    .notFound__container-detail{
+        font-size: 1.5rem;
+    }
+}
