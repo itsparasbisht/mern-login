@@ -1,12 +1,16 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useContext } from 'react'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import userContext from '../context/userContext/UserContext'
 import './rootPage.css'
 axios.defaults.withCredentials = true
 
 function RootPage() {
     const navigate = useNavigate()
+
+    // user context
+    const [userState, dispatch] = useContext(userContext)
 
     useEffect(() => {
         setTimeout(() => {
@@ -16,7 +20,8 @@ function RootPage() {
 
     const getUser = async () => {
         try {
-            const response = await axios.get('/api/auth/get-user')
+            await axios.get('/api/auth/get-user')
+            dispatch({type: "VALID-USER"})
             navigate('/home')
         }
         catch (error) {
