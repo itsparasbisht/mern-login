@@ -1,26 +1,25 @@
-const express = require('express')
-const app = express()
+const express = require("express");
+const app = express();
 
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/full-stack", (error) => {
-    if (error) {
-        console.log(error)
-    }
-    else {
-        console.log("connected to database")
-    }
-})
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("connected to database");
+  }
+});
 
-const PORT = 5000 || process.env.PORT
+const PORT = 5000 || process.env.PORT;
 
-app.use(express.json())
+app.use(express.json());
 
-app.get('/', function (req, res) {
-    res.json("This is the initial route for our project")
-})
+app.get("/", function (req, res) {
+  res.json("This is the initial route for our project");
+});
 
-app.use('/api/auth', require('./routes/auth'))
+app.use("/api/auth", require("./routes/auth"));
 
 app.listen(PORT, () => {
-    console.log(`connected at port ${PORT}`)
-})
+  console.log(`connected at port ${PORT}`);
+});
