@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './loginPage.css'
 import './signupPage.css'
 import Box from '@mui/material/Box';
@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import SnackbarComponent from '../components/SnackbarComponent';
+import userContext from '../context/userContext/UserContext';
 
 function LoginPage() {
     const [username, setUsername] = useState('')
@@ -24,6 +25,9 @@ function LoginPage() {
     const [errorMessage, setErrorMessage] = useState("")
 
     const navigate = useNavigate()
+
+    // user context
+    const [userState, dispatch] = useContext(userContext)
 
     const logIn = () => {
         const checkUserName = validator.isAlphanumeric(username)
@@ -58,6 +62,7 @@ function LoginPage() {
                 const response = await axios.post(`/api/auth/log-in`, data)
                 setDisableLogin(false)
                 if (response.status === 200) {
+                    dispatch({type: "VALID-USER"})
                     navigate('/home')
                 }
             }

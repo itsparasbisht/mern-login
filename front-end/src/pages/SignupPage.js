@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import './signupPage.css'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -11,6 +11,7 @@ import SnackbarComponent from '../components/SnackbarComponent';
 import { Link, useNavigate } from "react-router-dom";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import userContext from '../context/userContext/UserContext';
 
 function SignupPage() {
     const [username, setUsername] = useState('')
@@ -25,6 +26,9 @@ function SignupPage() {
     const [error, setError] = useState(false)
 
     const navigate = useNavigate()
+
+    // user context
+    const [userState, dispatch] = useContext(userContext)
 
     const signUp = () => {
         const checkUserName = validator.isAlphanumeric(username)
@@ -67,6 +71,7 @@ function SignupPage() {
                     setError(true)
                 }
                 else if (response.status === 201) {
+                    dispatch({type: "VALID-USER"})
                     navigate('/home')
                 }
                 setDisableSignUp(false)
