@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import NavBar from '../components/NavBar'
 import userContext from '../context/userContext/UserContext'
 
 function HomePage() {
@@ -6,7 +7,9 @@ function HomePage() {
     
 
     return (
-        <div>HomePage</div>
+        <>
+            <NavBar />
+        </>
     )
 }
 
