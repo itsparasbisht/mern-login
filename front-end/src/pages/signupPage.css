@@ -116,4 +116,13 @@
         align-items: center;
         text-align: center;
     }
+    .block1 > .signup__container-form{
+        padding: 20px 10px;
+        width: 90%;
+        max-width: 400px;
+        box-shadow: none;
+    }
+    .signup__container-footer{
+        font-size: 15px;
+    }
 }
