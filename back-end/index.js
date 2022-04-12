@@ -10,7 +10,7 @@ mongoose.connect("mongodb://localhost:27017/full-stack", (error) => {
   }
 });
 
-const PORT = 5000 || process.env.PORT;
+const PORT = 8000 || process.env.PORT;
 
 app.use(express.json());
 
