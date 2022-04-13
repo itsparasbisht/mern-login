@@ -111,7 +111,7 @@ function LoginPage() {
 
                             <Stack className='signup__container-formBodyButtons' spacing={2} direction="row">
                                 <Button disabled={disableLogin} onClick={logIn} variant="contained">Login</Button>
-                                <Button onClick={resetForm} variant="text">Reset</Button>
+                                <Button onClick={resetForm} variant="text" >Reset</Button>
                             </Stack>
                         </div>
                         <div className='signup__container-footer'>

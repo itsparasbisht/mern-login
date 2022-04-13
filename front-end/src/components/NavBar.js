@@ -1,5 +1,6 @@
 import React from 'react'
 import './navBar.css'
+import Button from '@mui/material/Button';
 
 function NavBar() {
   return (
@@ -11,7 +12,7 @@ function NavBar() {
 
       <p>
         <span>paras@mail.com</span>
-        <button>logout</button>
+        <Button variant="contained" color="primary">logout</Button>
       </p>
     </nav>
   )

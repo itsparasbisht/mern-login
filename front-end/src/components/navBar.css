@@ -26,6 +26,7 @@ nav > p{
     flex-grow: 0.04;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 nav > p > span{
     font-size: 1.2rem;
@@ -39,6 +40,12 @@ nav > p > button{
     font-weight: bold;
     cursor: pointer;
     color: rgb(255, 115, 0);
+    padding: 0.3rem 0.8rem;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+.MuiButton-root{
+    background-color: red !important;
 }
 
 @media all and (max-width: 800px){

@@ -13,21 +13,21 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          
-          <Route path="/" element={auth.isAuthenticated ? <HomePage /> : <LoginPage />} />
+        <BrowserRouter>
+          <Routes>
+            
+            <Route path="/" element={auth.isAuthenticated ? <HomePage /> : <LoginPage />} />
 
-          {
-            auth.isAuthenticated && <Route path='/home' element={<HomePage />} />
-          }
+            {
+              auth.isAuthenticated && <Route path='/home' element={<HomePage />} />
+            }
 
-          <Route path="/log-in" element={<LoginPage />} />
-          <Route path="/sign-up" element={<SignupPage />} />
+            <Route path="/log-in" element={<LoginPage />} />
+            <Route path="/sign-up" element={<SignupPage />} />
 
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
     </div>
   );
 }

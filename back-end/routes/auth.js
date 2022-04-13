@@ -67,7 +67,7 @@ router.get('/get-user', async (req, res) => {
 
         // verify the token
         jwt.verify(token, privateKey, async function (err, decoded) {
-            const userId = decoded.id
+            const userId = decoded?.id
 
             const user = await User.findById(userId, { password: false })
             res.status(200).send(user)
