@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import UserState from './context/userContext/UserState';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import UserState from "./context/userContext/UserState";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -10,5 +10,5 @@ ReactDOM.render(
       <App />
     </UserState>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
