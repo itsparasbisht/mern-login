@@ -12,6 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import SnackbarComponent from "../components/SnackbarComponent";
 import userContext from "../context/userContext/UserContext";
+import config from "../utils";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
@@ -25,6 +26,8 @@ function LoginPage() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
+
+  const apiUrl = config.api_url;
 
   // user context
   const [userState, dispatch] = useContext(userContext);
@@ -56,7 +59,7 @@ function LoginPage() {
       };
 
       try {
-        const response = await axios.post(`/api/auth/log-in`, data);
+        const response = await axios.post(apiUrl + `/api/auth/log-in`, data);
         setDisableLogin(false);
         if (response.status === 200) {
           const user = response.data;

@@ -78,9 +78,14 @@ router.get("/get-user", async (req, res) => {
       const userId = decoded?.id;
 
       const user = await User.findById(userId, { password: false });
-      res.status(200).send(user);
+      if (user) {
+        res.status(200).send(user);
+      } else {
+        throw "auth error";
+      }
     });
   } catch (error) {
+    console.log(error);
     res.status(401).send({ message: "authentication error" });
   }
 });

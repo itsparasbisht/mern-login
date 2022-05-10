@@ -12,6 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import userContext from "../context/userContext/UserContext";
+import config from "../utils";
 
 function SignupPage() {
   const [username, setUsername] = useState("");
@@ -26,6 +27,8 @@ function SignupPage() {
   const [error, setError] = useState(false);
 
   const navigate = useNavigate();
+
+  const apiUrl = config.api_url;
 
   // user context
   const [userState, dispatch] = useContext(userContext);
@@ -61,7 +64,7 @@ function SignupPage() {
         password,
       };
       try {
-        const response = await axios.post("/api/auth/sign-up", data);
+        const response = await axios.post(apiUrl + "/api/auth/sign-up", data);
         console.log(response);
         if (response.data.message === "username exists") {
           setError(true);
