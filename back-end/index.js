@@ -2,7 +2,10 @@ const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
 
+const PORT = 8000 || process.env.PORT;
+
 app.use(cookieParser());
+app.use(express.json());
 
 // configure response headers
 app.use((req, res, next) => {
@@ -12,6 +15,7 @@ app.use((req, res, next) => {
   next();
 });
 
+// mongoose setup
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/full-stack", (error) => {
   if (error) {
@@ -21,16 +25,14 @@ mongoose.connect("mongodb://localhost:27017/full-stack", (error) => {
   }
 });
 
-const PORT = 8000 || process.env.PORT;
-
-app.use(express.json());
-
+// request routes
 app.get("/", function (req, res) {
   res.json("This is the initial route for our project");
 });
 
 app.use("/api/auth", require("./routes/auth"));
 
+// our server
 app.listen(PORT, () => {
   console.log(`connected at port ${PORT}`);
 });
