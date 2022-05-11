@@ -62,16 +62,9 @@ router.post("/sign-up", async (req, res) => {
 // get user details
 router.get("/get-user", async (req, res) => {
   try {
-    const cookies = req.headers.cookie;
-    const cookieArray = cookies.split(";");
-    const cookieObj = cookieArray.map((item) => {
-      const data = item.split("=");
-      return {
-        key: data[0],
-        value: data[1],
-      };
-    });
-    const token = cookieObj[0].value;
+    // get all the cookies
+    const cookies = req.cookies;
+    const token = cookies.jwt;
 
     // verify the token
     jwt.verify(token, privateKey, async function (err, decoded) {
@@ -81,7 +74,7 @@ router.get("/get-user", async (req, res) => {
       if (user) {
         res.status(200).send(user);
       } else {
-        throw "auth error";
+        res.status(401).send({ message: "authentication error" });
       }
     });
   } catch (error) {

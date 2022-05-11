@@ -71,7 +71,11 @@ function LoginPage() {
         const errorObj = { ...error };
         setDisableLogin(false);
         setError(true);
-        setErrorMessage(errorObj.response.data.message);
+        if (errorObj?.response?.data?.message) {
+          setErrorMessage(errorObj.response.data.message);
+        } else {
+          setErrorMessage("Failed to login");
+        }
       }
     }
   };
