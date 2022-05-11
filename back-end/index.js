@@ -1,5 +1,16 @@
 const express = require("express");
 const app = express();
+const cookieParser = require("cookie-parser");
+
+app.use(cookieParser());
+
+// configure response headers
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
 
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/full-stack", (error) => {
