@@ -6,6 +6,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import SnackbarComponent from "./SnackbarComponent";
 import utils from "../utils";
+import Avatar from "@mui/material/Avatar";
+import Tooltip from "@mui/material/Tooltip";
 
 function NavBar() {
   const [username, setUsername] = useState();
@@ -42,13 +44,30 @@ function NavBar() {
         </div>
 
         <p>
-          <Typography variant="body1" component="span">
-            {username}
-          </Typography>
+          <Tooltip
+            title={
+              <Typography variant="subtitle2" fontSize="13px">
+                {"logged in as " + username}
+              </Typography>
+            }
+            followCursor
+          >
+            <Avatar
+              sx={{
+                width: "40px",
+                height: "40px",
+                bgcolor: "black",
+                cursor: "pointer",
+              }}
+            >
+              {username && username[0]?.toUpperCase()}
+            </Avatar>
+          </Tooltip>
           <Button
-            color="primary"
             sx={{ textTransform: "capitalize" }}
             onClick={handleLogout}
+            variant="outlined"
+            color="secondary"
           >
             logout
           </Button>
