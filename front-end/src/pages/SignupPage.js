@@ -12,7 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import userContext from "../context/userContext/UserContext";
-import config from "../utils";
+import utils from "../utils";
 
 function SignupPage() {
   const [username, setUsername] = useState("");
@@ -28,7 +28,7 @@ function SignupPage() {
 
   const navigate = useNavigate();
 
-  const apiUrl = config.api_url;
+  const apiUrl = utils.api_url;
 
   // user context
   const [userState, dispatch] = useContext(userContext);

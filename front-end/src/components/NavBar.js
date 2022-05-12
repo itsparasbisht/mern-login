@@ -5,6 +5,7 @@ import { Typography } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import SnackbarComponent from "./SnackbarComponent";
+import utils from "../utils";
 
 function NavBar() {
   const [username, setUsername] = useState();
@@ -17,8 +18,9 @@ function NavBar() {
   }, []);
 
   const handleLogout = async () => {
+    setError(false);
     try {
-      const response = await axios.get("/api/auth/log-out");
+      const response = await axios.get(utils.api_url + "/api/auth/log-out");
       if (response.data.message === "user logged out") {
         navigate("/log-in");
       } else {

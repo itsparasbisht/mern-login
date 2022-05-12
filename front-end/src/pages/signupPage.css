@@ -73,17 +73,6 @@
     justify-content: flex-start;
     margin-left: 35px;
 }
-.MuiButton-root:first-of-type{
-    background-color: rgb(26, 26, 26) !important;
-}
-.MuiTooltip-tooltip{
-    font-size: 13px !important;
-    background-color: rgb(27, 27, 27) !important;
-}
-.MuiButton-root:disabled{
-    background-color: rgb(214, 214, 214) !important;
-    color: rgb(97, 97, 97) !important;
-}
 .signup__container-footer{
     padding: 10px 40px;
     font-size: 16px;
