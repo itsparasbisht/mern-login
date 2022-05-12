@@ -43,6 +43,15 @@ nav > p > button{
     border: 2px solid black;
     border-radius: 5px;
 }
+.navbar__avatar{
+    width: 40px;
+    height: 40px;
+    background-color: black;
+    cursor: pointer;
+}
+.navbar__username{
+    font-size: 13px;
+}
 
 @media all and (max-width: 800px){
     html{
@@ -58,7 +67,13 @@ nav > p > button{
         display: none;
     }
     nav > p{
-        flex-direction: column;
         align-items: flex-end;
+    }
+    .navbar__avatar{
+        width: 35px;
+        height: 35px;
+    }
+    .navbar__username{
+        font-size: 11px;
     }
 }

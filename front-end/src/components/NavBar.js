@@ -46,20 +46,13 @@ function NavBar() {
         <p>
           <Tooltip
             title={
-              <Typography variant="subtitle2" fontSize="13px">
+              <Typography variant="subtitle2" className="navbar__username">
                 {"logged in as " + username}
               </Typography>
             }
             followCursor
           >
-            <Avatar
-              sx={{
-                width: "40px",
-                height: "40px",
-                bgcolor: "black",
-                cursor: "pointer",
-              }}
-            >
+            <Avatar className="navbar__avatar">
               {username && username[0]?.toUpperCase()}
             </Avatar>
           </Tooltip>
