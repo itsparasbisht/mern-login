@@ -1,0 +1,12 @@
+.container{
+    background-color: rgb(242, 242, 242);
+    max-width: 600px;
+    width: 80%;
+    height: 20vh;
+    margin: 1.5rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 6px dotted rgb(57, 57, 57);
+    border-radius: 37px;
+}
