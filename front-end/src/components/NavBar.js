@@ -52,7 +52,9 @@ function NavBar() {
             }
             followCursor
           >
-            <Avatar className="navbar__avatar">
+            <Avatar
+              sx={{ bgcolor: "black", width: "2.5rem", height: "2.5rem" }}
+            >
               {username && username[0]?.toUpperCase()}
             </Avatar>
           </Tooltip>
