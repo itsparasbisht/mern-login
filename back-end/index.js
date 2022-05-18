@@ -5,7 +5,11 @@ const cookieParser = require("cookie-parser");
 const PORT = 8000 || process.env.PORT;
 
 app.use(cookieParser());
-app.use(express.json());
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // configure response headers
 app.use((req, res, next) => {
@@ -31,6 +35,7 @@ app.get("/", function (req, res) {
 });
 
 app.use("/api/auth", require("./routes/auth"));
+app.use("/api/file", require("./routes/file"));
 
 // our server
 app.listen(PORT, () => {
