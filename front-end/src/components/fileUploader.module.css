@@ -10,3 +10,7 @@
     border: 6px dotted rgb(57, 57, 57);
     border-radius: 37px;
 }
+.buttons{
+    display: flex;
+    justify-content: center;
+}
