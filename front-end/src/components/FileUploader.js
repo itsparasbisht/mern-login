@@ -10,17 +10,12 @@ function FileUploader() {
 
   const handleFileUpload = async () => {
     const formData = new FormData();
-    formData.append("file", file[0]);
+    // formData.append("file", file[0]);
+    const data = file[0];
+    const fi = await data.raw.text();
+    console.log(">>>", fi);
 
-    const response = await axios.post(
-      utils.api_url + `/api/file/process`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+    const response = await axios.post(utils.api_url + `/api/file/process`);
     console.log(response);
   };
 

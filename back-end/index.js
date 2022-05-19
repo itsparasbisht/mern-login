@@ -5,11 +5,8 @@ const cookieParser = require("cookie-parser");
 const PORT = 8000 || process.env.PORT;
 
 app.use(cookieParser());
-// app.use(express.json());
+app.use(express.json());
 // app.use(express.urlencoded({ extended: true }));
-const bodyParser = require("body-parser");
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 // configure response headers
 app.use((req, res, next) => {
