@@ -1,15 +1,22 @@
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
 const fs = require("fs");
+const path = require("path");
 
 router.post("/process", (req, res) => {
-  const fileName = req.headers["file-name"];
-  const chunkId = req.headers["chunk-id"];
-  req.on("data", (chunk) => {
-    fs.appendFileSync(fileName, chunk);
+  if (req.files === null) {
+    return res.status(400).send({ message: "No file uploaded" });
+  }
+
+  const file = req.files.file;
+  file.mv(`${path.join(__dirname, "../uploads")}/${file.name}`, (error) => {
+    if (error) {
+      console.log(error);
+      return res.status(500).send(error);
+    }
+
+    res.send({ filename: file.name, message: "Uploaded" });
   });
-  res.status(200).send({ message: "uploaded" });
 });
 
 module.exports = router;

@@ -10,42 +10,23 @@ function FileUploader() {
 
   const handleFileUpload = async () => {
     const theFile = file[0];
-    axios.post(utils.api_url + `/api/file/process`, theFile, {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    });
+    const fd = new FormData();
+    fd.append("file", theFile);
+
+    try {
+      const response = await axios.post(
+        utils.api_url + `/api/file/process`,
+        fd,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  // const handleFileUpload = async () => {
-  //   const fileReader = new FileReader();
-  //   const theFile = file[0];
-  // fileReader.onload = async (e) => {
-  //   const CHUNK_SIZE = 1000000; //bytes
-  //   const chunkCount = e.target.result.byteLength / CHUNK_SIZE;
-
-  //   console.log("read successfully");
-  //   const fileName = Math.random() * 1000 + theFile.name;
-
-  //   for (let chunkId = 0; chunkId < chunkCount + 1; chunkId++) {
-  //     const chunk = e.target.result.slice(
-  //       chunkId * CHUNK_SIZE,
-  //       chunkId * CHUNK_SIZE + CHUNK_SIZE
-  //     );
-
-  //     await axios.post(utils.api_url + `/api/file/process`, chunk, {
-  //       headers: {
-  //         // "content-type": "application/octet-stream",
-  //         "file-name": fileName,
-  //       },
-  //     });
-  //   }
-  // };
-  // fileReader.addEventListener("progress", (e) => {
-  //   console.log(e);
-  // });
-  // fileReader.readAsArrayBuffer(theFile);
-  // };
 
   return (
     <>
