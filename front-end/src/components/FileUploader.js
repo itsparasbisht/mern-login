@@ -9,15 +9,43 @@ function FileUploader() {
   const [file, setFile] = useState(null);
 
   const handleFileUpload = async () => {
-    const formData = new FormData();
-    // formData.append("file", file[0]);
-    const data = file[0];
-    const fi = await data.raw.text();
-    console.log(">>>", fi);
-
-    const response = await axios.post(utils.api_url + `/api/file/process`);
-    console.log(response);
+    const theFile = file[0];
+    axios.post(utils.api_url + `/api/file/process`, theFile, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
   };
+
+  // const handleFileUpload = async () => {
+  //   const fileReader = new FileReader();
+  //   const theFile = file[0];
+  // fileReader.onload = async (e) => {
+  //   const CHUNK_SIZE = 1000000; //bytes
+  //   const chunkCount = e.target.result.byteLength / CHUNK_SIZE;
+
+  //   console.log("read successfully");
+  //   const fileName = Math.random() * 1000 + theFile.name;
+
+  //   for (let chunkId = 0; chunkId < chunkCount + 1; chunkId++) {
+  //     const chunk = e.target.result.slice(
+  //       chunkId * CHUNK_SIZE,
+  //       chunkId * CHUNK_SIZE + CHUNK_SIZE
+  //     );
+
+  //     await axios.post(utils.api_url + `/api/file/process`, chunk, {
+  //       headers: {
+  //         // "content-type": "application/octet-stream",
+  //         "file-name": fileName,
+  //       },
+  //     });
+  //   }
+  // };
+  // fileReader.addEventListener("progress", (e) => {
+  //   console.log(e);
+  // });
+  // fileReader.readAsArrayBuffer(theFile);
+  // };
 
   return (
     <>
