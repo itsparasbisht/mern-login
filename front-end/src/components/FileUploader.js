@@ -21,6 +21,11 @@ function FileUploader() {
           headers: {
             "Content-Type": "multipart/form-data",
           },
+          onUploadProgress: (ProgressEvent) => {
+            const percentage =
+              (ProgressEvent.loaded / ProgressEvent.total) * 100;
+            console.log(percentage);
+          },
         }
       );
     } catch (error) {
